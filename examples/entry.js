@@ -12,6 +12,7 @@ import FooterNav from './components/footer-nav';
 import title from './i18n/title';
 
 import 'packages/theme-chalk/src/index.scss';
+import 'packages/theme-chalk/src/tdesign/index.less'; // for t-design
 import './demo-styles/index.scss';
 import './assets/styles/common.css';
 import './assets/styles/fonts/style.css';
@@ -32,8 +33,10 @@ const globalEle = new Vue({
 Vue.mixin({
   computed: {
     $isEle: {
-      get: () => (globalEle.$data.$isEle),
-      set: (data) => {globalEle.$data.$isEle = data;}
+      get: () => globalEle.$data.$isEle,
+      set: data => {
+        globalEle.$data.$isEle = data;
+      }
     }
   }
 });
@@ -63,7 +66,8 @@ router.afterEach(route => {
   ga('send', 'event', 'PageView', route.name);
 });
 
-new Vue({ // eslint-disable-line
+new Vue({
+  // eslint-disable-line
   ...entry,
   router
 }).$mount('#app');

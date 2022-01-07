@@ -1,0 +1,18 @@
+.input-status(@status) {
+
+  &.@{prefix}-is-@{status} {
+
+    .@{prefix}-form__controls--content {
+      // TODO: should consider all official-provided form components(select/checkbox/datepicker...)
+      > .@{prefix}-input {
+        border-color: @@borderColor;
+
+        &:focus {
+          box-shadow: 0 0 0 2px @@boxShadowColor;
+          @boxShadowColor: "input-box-shadow-color-@{status}-focus";
+        }
+        @borderColor: "input-border-color-@{status}";
+      }
+    }
+  }
+}

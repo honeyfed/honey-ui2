@@ -1,9 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var Components = require('../../components.json');
-var themes = [
-  'theme-chalk'
-];
+var themes = ['theme-chalk'];
 Components = Object.keys(Components);
 var basepath = path.resolve(__dirname, '../../packages/');
 
@@ -15,9 +13,12 @@ function fileExists(filePath) {
   }
 }
 
-themes.forEach((theme) => {
+themes.forEach(theme => {
   var isSCSS = theme !== 'theme-default';
   var indexContent = isSCSS ? '@import "./base.scss";\n' : '@import "./base.css";\n';
+  if (process.env.NODE_ENV === 'production') {
+    indexContent += '@import "../lib/tdesign/index";\n';
+  }
   Components.forEach(function(key) {
     if (['icon', 'option', 'option-group'].indexOf(key) > -1) return;
     var fileName = key + (isSCSS ? '.scss' : '.css');

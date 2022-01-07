@@ -1,0 +1,25 @@
+// width
+@tooltip-max-width: 480px;
+
+// 颜色
+@tooltip-bg: @gray-color-12; // tooltip 背景色不随组件库浅色/深色模式切换而改变，因此使用固定色值变量
+@tooltip-bg-primary: @brand-color;
+@tooltip-bg-success: @success-color;
+@tooltip-bg-danger: @error-color;
+@tooltip-bg-warning: @warning-color;
+@tooltip-text-color: @text-color-anti;
+// 间距
+@tooltip-padding: 6px 12px;
+@tooltip-default-margin: @spacer;
+@tooltip-reference-margin: 10px;
+
+// 阴影
+@tooltip-shadow: @shadow-2;
+
+// 动画
+@tooltip-flow: t-popup--animation;
+@cubic-bezier: cubic-bezier(0, .48, .33, 1);
+@flowin-transition: opacity @anim-duration-base @cubic-bezier;
+
+//tooltip箭头位移量
+@tooltip-arrow-position: 4px;
