@@ -1,78 +1,92 @@
 <template>
   <button
-    class="el-button"
+    v-ripple
+    class="t-button"
     @click="handleClick"
     :disabled="buttonDisabled || loading"
     :autofocus="autofocus"
     :type="nativeType"
     :class="[
-      type ? 'el-button--' + type : '',
-      buttonSize ? 'el-button--' + buttonSize : '',
+      `t-button--variant-${buttonVariant}`,
+      type ? 't-button--theme-' + type : '',
+      buttonSize ? 't-size-' + buttonSize : '',
       {
-        'is-disabled': buttonDisabled,
-        'is-loading': loading,
+        't-is-disabled': buttonDisabled || loading,
+        't-is-loading': loading,
         'is-plain': plain,
         'is-round': round,
         'is-circle': circle
       }
     ]"
   >
-    <i class="el-icon-loading" v-if="loading"></i>
+    <i class="el-icon-loading t-loading" v-if="loading"></i>
     <i :class="icon" v-if="icon && !loading"></i>
-    <span v-if="$slots.default"><slot></slot></span>
+    <span class="t-button_text" v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
 <script>
-  export default {
-    name: 'ElButton',
+import ripple from 'element-ui/src/utils/ripple';
 
-    inject: {
-      elForm: {
-        default: ''
-      },
-      elFormItem: {
-        default: ''
-      }
+export default {
+  name: 'ElButton',
+
+  inject: {
+    elForm: {
+      default: ''
     },
-
-    props: {
-      type: {
-        type: String,
-        default: 'default'
-      },
-      size: String,
-      icon: {
-        type: String,
-        default: ''
-      },
-      nativeType: {
-        type: String,
-        default: 'button'
-      },
-      loading: Boolean,
-      disabled: Boolean,
-      plain: Boolean,
-      autofocus: Boolean,
-      round: Boolean,
-      circle: Boolean
-    },
-
-    computed: {
-      _elFormItemSize() {
-        return (this.elFormItem || {}).elFormItemSize;
-      },
-      buttonSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
-      },
-      buttonDisabled() {
-        return this.$options.propsData.hasOwnProperty('disabled') ? this.disabled : (this.elForm || {}).disabled;
-      }
-    },
-
-    methods: {
-      handleClick(evt) {
-        this.$emit('click', evt);
-      }
+    elFormItem: {
+      default: ''
     }
-  };
+  },
+
+  props: {
+    type: {
+      type: String,
+      default: 'default'
+    },
+    variant: {
+      type: String,
+      default: 'base'
+    },
+    size: String,
+    icon: {
+      type: String,
+      default: ''
+    },
+    nativeType: {
+      type: String,
+      default: 'button'
+    },
+    loading: Boolean,
+    disabled: Boolean,
+    plain: Boolean,
+    autofocus: Boolean,
+    round: Boolean,
+    circle: Boolean
+  },
+
+  directives: { ripple },
+
+  computed: {
+    _elFormItemSize() {
+      return (this.elFormItem || {}).elFormItemSize;
+    },
+    buttonSize() {
+      // return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      return (this.size || this._elFormItemSize || (this.$ELEMENT || {}).size) === 'medium' ? 's' : 'm';
+    },
+    buttonVariant() {
+      return this.type === 'text' ? 'text' : this.variant;
+    },
+    buttonDisabled() {
+      return this.$options.propsData.hasOwnProperty('disabled') ? this.disabled : (this.elForm || {}).disabled;
+    }
+  },
+
+  methods: {
+    handleClick(evt) {
+      this.$emit('click', evt);
+    }
+  }
+};
 </script>

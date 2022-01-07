@@ -73,14 +73,24 @@
 ```
 :::
 
-### 文字按钮
+### 不同类别的按钮
 
 没有边框和背景色的按钮。
 
 :::demo
 ```html
+<el-row>
+<el-button type="primary" variant="outline">描边按钮</el-button>
+<el-button type="primary" variant="outline" disabled>描边按钮</el-button>
+</el-row>
+<el-row>
+<el-button variant="dashed">虚框按钮</el-button>
+<el-button variant="dashed" disabled>虚框按钮</el-button>
+</el-row>
+<el-row>
 <el-button type="text">文字按钮</el-button>
 <el-button type="text" disabled>文字按钮</el-button>
+</el-row>
 ```
 :::
 
