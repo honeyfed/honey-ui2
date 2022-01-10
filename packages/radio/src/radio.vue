@@ -1,12 +1,11 @@
 <template>
   <label
-    class="el-radio"
+    class="t-radio"
     :class="[
-      border && radioSize ? 'el-radio--' + radioSize : '',
-      { 'is-disabled': isDisabled },
+      { 't-is-disabled': isDisabled },
       { 'is-focus': focus },
       { 'is-bordered': border },
-      { 'is-checked': model === label }
+      { 't-is-checked': model === label }
     ]"
     role="radio"
     :aria-checked="model === label"
@@ -14,16 +13,16 @@
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
-    <span class="el-radio__input"
+    <!-- <span class="el-radio__input"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
       }"
-    >
-      <span class="el-radio__inner"></span>
+    > -->
+      <span class="t-radio__input"></span>
       <input
         ref="radio"
-        class="el-radio__original"
+        class="t-radio__former"
         :value="label"
         type="radio"
         aria-hidden="true"
@@ -36,8 +35,8 @@
         tabindex="-1"
         autocomplete="off"
       >
-    </span>
-    <span class="el-radio__label" @keydown.stop>
+    <!-- </span> -->
+    <span class="t-radio__label" @keydown.stop>
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
     </span>

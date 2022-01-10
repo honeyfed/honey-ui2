@@ -1,10 +1,10 @@
 <template>
   <label
-    class="el-radio-button"
+    class="t-radio-button"
     :class="[
-      size ? 'el-radio-button--' + size : '',
-      { 'is-active': value === label },
-      { 'is-disabled': isDisabled },
+      size ? 't-size-' + size : '',
+      { 't-is-checked': value === label },
+      { 't-is-disabled': isDisabled },
       { 'is-focus': focus }
     ]"
     role="radio"
@@ -14,7 +14,7 @@
     @keydown.space.stop.prevent="value = isDisabled ? value : label"
   >
     <input
-      class="el-radio-button__orig-radio"
+      class="t-radio-button__former"
       :value="label"
       type="radio"
       v-model="value"
@@ -27,7 +27,7 @@
       autocomplete="off"
     >
     <span
-      class="el-radio-button__inner"
+      class="t-radio-button__label"
       :style="value === label ? activeStyle : null"
       @keydown.stop>
       <slot></slot>
