@@ -1,13 +1,21 @@
 <template>
-  <i :class="'el-icon-' + name"></i>
+  <icon v-if="tdName" :name="tdName" :style="style || null" :size="size ? size : null" />
+  <i v-else :class="'el-icon-' + name"></i>
 </template>
 
 <script>
-  export default {
-    name: 'ElIcon',
+import { Icon } from 'tdesign-icons-vue';
 
-    props: {
-      name: String
-    }
-  };
+export default {
+  name: 'ElIcon',
+
+  components: { Icon },
+
+  props: {
+    name: String,
+    tdName: String,
+    style: String,
+    size: String
+  }
+};
 </script>

@@ -5,6 +5,11 @@
   vertical-align: middle;
 }
 
+.demo-icon .source .icon-block svg {
+  margin: 0 20px;
+  vertical-align: middle;
+}
+
 .demo-icon .source button {
   margin: 0 20px;
 }
@@ -12,9 +17,15 @@
 .page-component .content > ul.icon-list {
   overflow: hidden;
   list-style: none;
-  padding: 0!important;
+  padding: 0 !important;
   border: solid 1px #eaeefb;
   border-radius: 4px;
+}
+.td-icon svg {
+  display: block;
+  color: #606266;
+  font-size: 2em;
+  margin: 0 auto;
 }
 .icon-list li {
   float: left;
@@ -31,7 +42,7 @@
 
   &::after {
     display: inline-block;
-    content: "";
+    content: '';
     height: 100%;
     vertical-align: middle;
   }
@@ -40,8 +51,7 @@
     display: inline-block;
     line-height: normal;
     vertical-align: middle;
-    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-      "Microsoft YaHei", SimSun, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', SimSun, sans-serif;
     color: #99a9bf;
     transition: color 0.15s linear;
   }

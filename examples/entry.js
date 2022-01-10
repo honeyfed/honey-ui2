@@ -17,6 +17,7 @@ import './demo-styles/index.scss';
 import './assets/styles/common.css';
 import './assets/styles/fonts/style.css';
 import icon from './icon.json';
+import tdIcon from './icon_td.json';
 
 Vue.use(Element);
 Vue.use(VueRouter);
@@ -42,6 +43,7 @@ Vue.mixin({
 });
 
 Vue.prototype.$icon = icon; // Icon 列表页用
+Vue.prototype.$tdIcon = tdIcon; // Icon 列表页用 (TDesign)
 
 const router = new VueRouter({
   mode: 'hash',
