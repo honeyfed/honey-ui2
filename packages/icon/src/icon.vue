@@ -1,5 +1,5 @@
 <template>
-  <icon v-if="tdName" :name="tdName" :style="style || null" :size="size ? size : null" />
+  <icon v-if="tdName" :name="tdName" :size="size ? size : null" />
   <i v-else :class="'el-icon-' + name"></i>
 </template>
 
@@ -14,8 +14,11 @@ export default {
   props: {
     name: String,
     tdName: String,
-    style: String,
-    size: String
+    size: String,
+    click: {
+      type: Function,
+      default: () => {}
+    }
   }
 };
 </script>

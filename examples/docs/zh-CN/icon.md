@@ -16,7 +16,7 @@ TDesign 图标通过指定参数 `tdName` 来使用，Element 图标通过指定
 
 <div class="icon-block" style="margin-top:20px">
   <el-icon tdName="loading" style="color: #999999" />
-  <el-icon tdName="close" @click="onIconClose" />
+  <el-icon tdName="close" />
   <el-icon tdName="check-circle-filled" />
 </div>
 
