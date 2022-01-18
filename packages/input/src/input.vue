@@ -23,7 +23,7 @@
       <input
         :tabindex="tabindex"
         v-if="type !== 'textarea'"
-        class="el-input__inner"
+        :class="innerClass || 'el-input__inner'"
         v-bind="$attrs"
         :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
         :disabled="inputDisabled"
@@ -189,7 +189,8 @@
         type: Boolean,
         default: false
       },
-      tabindex: String
+      tabindex: String,
+      innerClass: String
     },
 
     computed: {

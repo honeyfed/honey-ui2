@@ -1,77 +1,94 @@
-@import "mixins/mixins";
-@import "mixins/utils";
-@import "common/var";
-@import "select-dropdown";
-@import "input";
-@import "tag";
-@import "option";
-@import "option-group";
-@import "scrollbar";
+@import 'mixins/mixins';
+@import 'mixins/utils';
+@import 'common/var';
+@import 'select-dropdown';
+@import 'input';
+@import 'tag';
+@import 'option';
+@import 'option-group';
+@import 'scrollbar';
 
 @include b(select) {
   display: inline-block;
   position: relative;
 
-  .el-select__tags
-    >span {
-      display: contents;
-    }
-
-  &:hover {
-    .el-input__inner {
-      border-color: $--select-border-color-hover;
-    }
+  .el-select__tags > span {
+    display: contents;
   }
 
-  .el-input__inner {
+  .t-input__inner {
     cursor: pointer;
     padding-right: 35px;
+  }
 
-    &:focus {
-      border-color: $--select-input-focus-border-color;
+  @include e(input) {
+    cursor: pointer;
+  }
+
+  &.t-is-disabled {
+    .t-input__inner {
+      cursor: not-allowed;
+    }
+    @include e(input) {
+      cursor: not-allowed;
     }
   }
 
-  .el-input {
-    & .el-select__caret {
-      color: $--select-input-color;
-      font-size: $--select-input-font-size;
-      transition: transform .3s;
-      transform: rotateZ(180deg);
-      cursor: pointer;
+  // &:hover {
+  //   .el-input__inner {
+  //     border-color: $--select-border-color-hover;
+  //   }
+  // }
 
-      @include when(reverse) {
-        transform: rotateZ(0deg);
-      }
+  // .el-input__inner {
+  //   cursor: pointer;
+  //   padding-right: 35px;
 
-      @include when(show-close) {
-        font-size: $--select-font-size;
-        text-align: center;
-        transform: rotateZ(180deg);
-        border-radius: $--border-radius-circle;
-        color: $--select-input-color;
-        transition: $--color-transition-base;
+  //   &:focus {
+  //     border-color: $--select-input-focus-border-color;
+  //   }
+  // }
 
-        &:hover {
-          color: $--select-close-hover-color;
-        }
-      }
-    }
+  // .el-input {
+  //   & .el-select__caret {
+  //     color: $--select-input-color;
+  //     font-size: $--select-input-font-size;
+  //     transition: transform .3s;
+  //     transform: rotateZ(180deg);
+  //     cursor: pointer;
 
-    &.is-disabled {
-      & .el-input__inner {
-        cursor: not-allowed;
+  //     @include when(reverse) {
+  //       transform: rotateZ(0deg);
+  //     }
 
-        &:hover {
-          border-color: $--select-disabled-border;
-        }
-      }
-    }
+  //     @include when(show-close) {
+  //       font-size: $--select-font-size;
+  //       text-align: center;
+  //       transform: rotateZ(180deg);
+  //       border-radius: $--border-radius-circle;
+  //       color: $--select-input-color;
+  //       transition: $--color-transition-base;
 
-    &.is-focus .el-input__inner {
-      border-color: $--select-input-focus-border-color;
-    }
-  }
+  //       &:hover {
+  //         color: $--select-close-hover-color;
+  //       }
+  //     }
+  //   }
+
+  //   &.is-disabled {
+  //     & .el-input__inner {
+  //       cursor: not-allowed;
+
+  //       &:hover {
+  //         border-color: $--select-disabled-border;
+  //       }
+  //     }
+  //   }
+
+  //   &.is-focus .el-input__inner {
+  //     border-color: $--select-input-focus-border-color;
+  //   }
+  // }
 
   > .el-input {
     display: block;
@@ -81,7 +98,7 @@
     border: none;
     outline: none;
     padding: 0;
-    margin-left: 15px;
+    margin-left: 4px;
     color: $--select-multiple-input-color;
     font-size: $--select-font-size;
     appearance: none;
@@ -145,7 +162,7 @@
 
       &::before {
         display: block;
-        transform: translate(0, .5px);
+        transform: translate(0, 0.5px);
       }
     }
   }
