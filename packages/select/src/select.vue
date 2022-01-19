@@ -113,19 +113,7 @@
       <el-icon :tdName="prefix" />
     </span>
     <el-icon v-if="showClose" tdName="close" class="t-select__right-icon" @click="handleClearClick" />
-    <svg
-      v-else
-      class="t-fake-arrow t-select__right-icon"
-      :class="{ 't-fake-arrow--active': visible }"
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style="{this.overlayStyle}"
-    >
-      <path d="M3.75 5.7998L7.99274 10.0425L12.2361 5.79921" stroke="black" stroke-opacity="0.9" stroke-width="1.3" />
-    </svg>
+    <fake-arrow v-else overlayClassName="t-select__right-icon" :isActive="visible" :disabled="selectDisabled" />
 
     <transition name="el-zoom-in-top" @before-enter="handleMenuEnter" @after-leave="doDestroy">
       <el-select-menu ref="popper" :append-to-body="popperAppendToBody" v-show="visible && emptyText !== false">
@@ -167,6 +155,7 @@ import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 import { getValueByPath, valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
 import NavigationMixin from './navigation-mixin';
 import { isKorean } from 'element-ui/src/utils/shared';
+import FakeArrow from 'element-ui/src/components/fake-arrow';
 
 export default {
   mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
@@ -259,7 +248,8 @@ export default {
     ElSelectMenu,
     ElOption,
     ElTag,
-    ElScrollbar
+    ElScrollbar,
+    FakeArrow
   },
 
   directives: { Clickoutside },
