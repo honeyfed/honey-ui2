@@ -121,7 +121,6 @@ import ElInput from 'element-ui/packages/input';
 import ElTag from 'element-ui/packages/tag';
 import ElScrollbar from 'element-ui/packages/scrollbar';
 import ElCascaderPanel from 'element-ui/packages/cascader-panel';
-import ElIcon from 'element-ui/packages/icon';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import { t } from 'element-ui/src/locale';
 import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
@@ -195,7 +194,6 @@ export default {
     ElTag,
     ElScrollbar,
     ElCascaderPanel,
-    ElIcon,
     FakeArrow
   },
 

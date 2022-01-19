@@ -148,7 +148,6 @@ import ElSelectMenu from './select-dropdown.vue';
 import ElOption from './option.vue';
 import ElTag from 'element-ui/packages/tag';
 import ElScrollbar from 'element-ui/packages/scrollbar';
-import ElIcon from 'element-ui/packages/icon';
 import debounce from 'throttle-debounce/debounce';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
@@ -250,8 +249,7 @@ export default {
     ElOption,
     ElTag,
     ElScrollbar,
-    FakeArrow,
-    ElIcon
+    FakeArrow
   },
 
   directives: { Clickoutside },

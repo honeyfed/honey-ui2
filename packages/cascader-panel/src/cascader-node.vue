@@ -1,7 +1,6 @@
 <script>
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElRadio from 'element-ui/packages/radio';
-import ElIcon from 'element-ui/packages/icon';
 import { isEqual } from 'element-ui/src/utils/util';
 
 const stopPropagation = e => e.stopPropagation();
@@ -11,8 +10,7 @@ export default {
 
   components: {
     ElCheckbox,
-    ElRadio,
-    ElIcon
+    ElRadio
   },
 
   props: {
