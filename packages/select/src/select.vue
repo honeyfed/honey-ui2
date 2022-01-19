@@ -114,6 +114,7 @@
     </span>
     <el-icon v-if="showClose" tdName="close" class="t-select__right-icon" @click="handleClearClick" />
     <svg
+      v-else
       class="t-fake-arrow t-select__right-icon"
       :class="{ 't-fake-arrow--active': visible }"
       width="16"
