@@ -15,12 +15,7 @@
     @mouseenter="inputHovering = true"
     @mouseleave="inputHovering = false"
   >
-    <div
-      class="el-select__tags"
-      v-if="multiple"
-      ref="tags"
-      :style="{ 'max-width': inputWidth + 'px', width: '100%' }"
-    >
+    <div class="el-select__tags" v-if="multiple" ref="tags" :style="{ 'max-width': inputWidth + 'px', width: '100%' }">
       <span v-if="collapseTags && selected.length">
         <el-tag
           :closable="!selectDisabled"
@@ -73,7 +68,7 @@
         v-model="query"
         @input="debouncedQueryChange"
         v-if="filterable"
-        :style="{ 'flex-grow': '1', width: inputLength / (inputWidth) + '%', 'max-width': inputWidth + 'px' }"
+        :style="{ 'flex-grow': '1', width: inputLength / inputWidth + '%', 'max-width': inputWidth + 'px' }"
         ref="input"
       />
     </div>
@@ -119,7 +114,6 @@
     </span>
     <el-icon v-if="showClose" tdName="close" class="t-select__right-icon" @click="handleClearClick" />
     <svg
-      v-else
       class="t-fake-arrow t-select__right-icon"
       :class="{ 't-fake-arrow--active': visible }"
       width="16"
@@ -135,22 +129,22 @@
     <transition name="el-zoom-in-top" @before-enter="handleMenuEnter" @after-leave="doDestroy">
       <el-select-menu ref="popper" :append-to-body="popperAppendToBody" v-show="visible && emptyText !== false">
         <el-scrollbar
+          class="t-select__dropdown t-popup__content"
           tag="ul"
-          wrap-class="el-select-dropdown__wrap"
-          view-class="el-select-dropdown__list"
+          wrap-class=""
+          view-class=""
           ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
-          v-show="options.length > 0 && !loading"
         >
           <el-option :value="query" created v-if="showNewOption"> </el-option>
           <slot></slot>
-        </el-scrollbar>
-        <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0))">
+          <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0))">
           <slot name="empty" v-if="$slots.empty"></slot>
-          <p class="el-select-dropdown__empty" v-else>
+          <p class="t-select__empty t-size-m" v-else>
             {{ emptyText }}
           </p>
         </template>
+        </el-scrollbar>
       </el-select-menu>
     </transition>
   </div>
@@ -516,7 +510,7 @@ export default {
     scrollToOption(option) {
       const target = Array.isArray(option) && option[0] ? option[0].$el : option.$el;
       if (this.$refs.popper && target) {
-        const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
+        const menu = this.$refs.popper.$el.querySelector('.t-select__dropdown');
         scrollIntoView(menu, target);
       }
       this.$refs.scrollbar && this.$refs.scrollbar.handleScroll();

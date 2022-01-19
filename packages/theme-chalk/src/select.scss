@@ -167,3 +167,25 @@
     }
   }
 }
+
+.t-select__dropdown {
+  overflow-y: hidden !important;
+
+  & > div {
+    padding: 0 !important;
+  }
+
+  .el-scrollbar__wrap {
+    max-height: 300px;
+  }
+  .el-scrollbar__view {
+    padding: 8px;
+  }
+
+  ul,
+  .t-select__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
