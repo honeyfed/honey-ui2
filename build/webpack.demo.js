@@ -158,11 +158,11 @@ if (isProd) {
   // https://webpack.js.org/configuration/optimization/#optimizationsplitchunks
   webpackConfig.optimization.splitChunks = {
     cacheGroups: {
-      vendor: {
-        test: /\/src\//,
-        name: 'element-ui',
-        chunks: 'all'
-      }
+      // vendor: {
+      //   test: /\/src\//,
+      //   name: 'element-ui',
+      //   chunks: 'all'
+      // }
     }
   };
   webpackConfig.devtool = false;
