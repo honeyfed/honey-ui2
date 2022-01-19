@@ -1,8 +1,8 @@
-@import "mixins/mixins";
-@import "common/var";
-@import "./checkbox";
-@import "./radio";
-@import "./scrollbar";
+@import 'mixins/mixins';
+@import 'common/var';
+@import './checkbox';
+@import './radio';
+@import './scrollbar';
 
 @include b(cascader-panel) {
   display: flex;
@@ -82,7 +82,8 @@
 
   &:not(.is-disabled) {
     cursor: pointer;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background: $--cascader-node-background-hover;
     }
   }
@@ -116,5 +117,20 @@
     .el-radio__label {
       padding-left: 0;
     }
+  }
+}
+
+.t-cascader__dropdown {
+  .t-cascader__menu {
+    overflow: hidden;
+    // padding: 0px;
+  }
+  ul,
+  .t-cascader__menu {
+    margin: 0;
+  }
+
+  .t-cascader-menu__wrap {
+    height: 215px;
   }
 }

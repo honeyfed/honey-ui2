@@ -21,7 +21,8 @@ export default {
       type: Array,
       required: true
     },
-    index: Number
+    index: Number,
+    menuLength: Number
   },
 
   data() {
@@ -75,9 +76,7 @@ export default {
     },
 
     renderEmptyText(h) {
-      return (
-        <div class="el-cascader-menu__empty-text">{ this.t('el.cascader.noData') }</div>
-      );
+      return <div class="el-cascader-menu__empty-text">{this.t('el.cascader.noData')}</div>;
     },
     renderNodeList(h) {
       const { menuId } = this;
@@ -92,24 +91,22 @@ export default {
         const { hasChildren } = node;
         return (
           <cascader-node
-            key={ node.uid }
-            node={ node }
-            node-id={ `${menuId}-${index}` }
-            aria-haspopup={ hasChildren }
-            aria-owns = { hasChildren ? menuId : null }
-            { ...events }></cascader-node>
+            key={node.uid}
+            node={node}
+            node-id={`${menuId}-${index}`}
+            aria-haspopup={hasChildren}
+            aria-owns={hasChildren ? menuId : null}
+            {...events}
+          ></cascader-node>
         );
       });
 
-      return [
-        ...nodes,
-        isHoverMenu ? <svg ref='hoverZone' class='el-cascader-menu__hover-zone'></svg> : null
-      ];
+      return [...nodes, isHoverMenu ? <svg ref="hoverZone" class="el-cascader-menu__hover-zone"></svg> : null];
     }
   },
 
   render(h) {
-    const { isEmpty, menuId } = this;
+    const { isEmpty, menuId, index, menuLength } = this;
     const events = { nativeOn: {} };
 
     // optimize hover to expand experience (#8010)
@@ -119,18 +116,31 @@ export default {
     }
 
     return (
+      // <el-scrollbar
+      //   tag="ul"
+      //   role="menu"
+      //   id={ menuId }
+      //   class="el-cascader-menu"
+      //   wrap-class="el-cascader-menu__wrap"
+      //   view-class={{
+      //     'el-cascader-menu__list': true,
+      //     'is-empty': isEmpty
+      //   }}
+      //   { ...events }>
+
       <el-scrollbar
-        tag="ul"
-        role="menu"
-        id={ menuId }
-        class="el-cascader-menu"
-        wrap-class="el-cascader-menu__wrap"
-        view-class={{
-          'el-cascader-menu__list': true,
+        class={{
+          't-cascader__menu--segment': index !== menuLength - 1,
           'is-empty': isEmpty
         }}
-        { ...events }>
-        { isEmpty ? this.renderEmptyText(h) : this.renderNodeList(h) }
+        tag="ul"
+        role="menu"
+        id={menuId}
+        wrap-class={{ 't-cascader-menu__wrap': true }}
+        view-class={{ 't-cascader__menu': true }}
+        {...events}
+      >
+        {isEmpty ? this.renderEmptyText(h) : this.renderNodeList(h)}
       </el-scrollbar>
     );
   }

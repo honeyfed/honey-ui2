@@ -2,18 +2,21 @@
   <div
     ref="reference"
     :class="[
-      'el-cascader',
-      realSize && `el-cascader--${realSize}`,
-      { 'is-disabled': isDisabled }
+      't-cascader',
+      `t-size-${realSize || 'm'}`,
+      { 't-is-disabled': isDisabled },
+      { 't-is-active': dropDownVisible }
     ]"
     v-clickoutside="() => toggleDropDownVisible(false)"
     @mouseenter="inputHover = true"
     @mouseleave="inputHover = false"
     @click="() => toggleDropDownVisible(readonly ? undefined : true)"
-    @keydown="handleKeyDown">
-
+    @keydown="handleKeyDown"
+  >
     <el-input
       ref="input"
+      class="t-input t-size-m"
+      inner-class="t-cascader__content t-input__inner"
       v-model="multiple ? presentText : inputValue"
       :size="realSize"
       :placeholder="placeholder"
@@ -23,24 +26,21 @@
       :class="{ 'is-focus': dropDownVisible }"
       @focus="handleFocus"
       @blur="handleBlur"
-      @input="handleInput">
-      <template slot="suffix">
-        <i
-          v-if="clearBtnVisible"
-          key="clear"
-          class="el-input__icon el-icon-circle-close"
-          @click.stop="handleClear"></i>
+      @input="handleInput"
+    >
+      <!-- <template slot="suffix">
+        <i v-if="clearBtnVisible" key="clear" class="el-input__icon el-icon-circle-close" @click.stop="handleClear"></i>
         <i
           v-else
           key="arrow-down"
-          :class="[
-            'el-input__icon',
-            'el-icon-arrow-down',
-            dropDownVisible && 'is-reverse'
-          ]"
-          @click.stop="toggleDropDownVisible()"></i>
-      </template>
+          :class="['el-input__icon', 'el-icon-arrow-down', dropDownVisible && 'is-reverse']"
+          @click.stop="toggleDropDownVisible()"
+        ></i>
+      </template> -->
     </el-input>
+
+    <el-icon v-if="clearBtnVisible" tdName="close" class="t-cascader__icon" @click.stop="handleClear" />
+    <fake-arrow v-else overlayClassName="t-cascader__icon" :isActive="dropDownVisible" :disabled="isDisabled" />
 
     <div v-if="multiple" class="el-cascader__tags">
       <el-tag
@@ -51,7 +51,8 @@
         :hit="tag.hitState"
         :closable="tag.closable"
         disable-transitions
-        @close="deleteTag(tag)">
+        @close="deleteTag(tag)"
+      >
         <span>{{ tag.text }}</span>
       </el-tag>
       <input
@@ -62,14 +63,13 @@
         :placeholder="presentTags.length ? '' : placeholder"
         @input="e => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
-        @keydown.delete="handleDelete">
+        @keydown.delete="handleDelete"
+      />
     </div>
 
     <transition name="el-zoom-in-top" @after-leave="handleDropdownLeave">
-      <div
-        v-show="dropDownVisible"
-        ref="popper"
-        :class="['el-popper', 'el-cascader__dropdown', popperClass]">
+      <!-- <div v-show="dropDownVisible" ref="popper" :class="['el-popper', 'el-cascader__dropdown', popperClass]"> -->
+      <div v-show="dropDownVisible" ref="popper" :class="['t-popup', popperClass]">
         <el-cascader-panel
           ref="panel"
           v-show="!filtering"
@@ -79,25 +79,25 @@
           :border="false"
           :render-label="$scopedSlots.default"
           @expand-change="handleExpandChange"
-          @close="toggleDropDownVisible(false)"></el-cascader-panel>
+          @close="toggleDropDownVisible(false)"
+        ></el-cascader-panel>
         <el-scrollbar
           ref="suggestionPanel"
           v-if="filterable"
           v-show="filtering"
           tag="ul"
-          class="el-cascader__suggestion-panel"
+          class="t-popup__content t-cascader__dropdown"
           view-class="el-cascader__suggestion-list"
-          @keydown.native="handleSuggestionKeyDown">
+          @keydown.native="handleSuggestionKeyDown"
+        >
           <template v-if="suggestions.length">
             <li
               v-for="(item, index) in suggestions"
               :key="item.uid"
-              :class="[
-                'el-cascader__suggestion-item',
-                item.checked && 'is-checked'
-              ]"
+              :class="['el-cascader__suggestion-item', item.checked && 'is-checked']"
               :tabindex="-1"
-              @click="handleSuggestionClick(index)">
+              @click="handleSuggestionClick(index)"
+            >
               <span>{{ item.text }}</span>
               <i v-if="item.checked" class="el-icon-check"></i>
             </li>
@@ -121,6 +121,7 @@ import ElInput from 'element-ui/packages/input';
 import ElTag from 'element-ui/packages/tag';
 import ElScrollbar from 'element-ui/packages/scrollbar';
 import ElCascaderPanel from 'element-ui/packages/cascader-panel';
+import ElIcon from 'element-ui/packages/icon';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import { t } from 'element-ui/src/locale';
 import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
@@ -128,6 +129,7 @@ import { isUndefined, isFunction } from 'element-ui/src/utils/types';
 import { isDef } from 'element-ui/src/utils/shared';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import debounce from 'throttle-debounce/debounce';
+import FakeArrow from 'element-ui/src/components/fake-arrow';
 
 const { keys: KeyCode } = AriaUtils;
 const MigratingProps = {
@@ -154,7 +156,7 @@ const PopperMixin = {
     appendToBody: Popper.props.appendToBody,
     visibleArrow: {
       type: Boolean,
-      default: true
+      default: false
     },
     arrowOffset: Popper.props.arrowOffset,
     offset: Popper.props.offset,
@@ -192,7 +194,9 @@ export default {
     ElInput,
     ElTag,
     ElScrollbar,
-    ElCascaderPanel
+    ElCascaderPanel,
+    ElIcon,
+    FakeArrow
   },
 
   props: {
@@ -223,7 +227,7 @@ export default {
     },
     beforeFilter: {
       type: Function,
-      default: () => (() => {})
+      default: () => () => {}
     },
     popperClass: String
   },
@@ -250,9 +254,7 @@ export default {
       return this.size || _elFormItemSize || (this.$ELEMENT || {}).size;
     },
     tagSize() {
-      return ['small', 'mini'].indexOf(this.realSize) > -1
-        ? 'mini'
-        : 'small';
+      return ['small', 'mini'].indexOf(this.realSize) > -1 ? 'mini' : 'small';
     },
     isDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
@@ -261,18 +263,16 @@ export default {
       const config = this.props || {};
       const { $attrs } = this;
 
-      Object
-        .keys(MigratingProps)
-        .forEach(oldProp => {
-          const { newProp, type } = MigratingProps[oldProp];
-          let oldValue = $attrs[oldProp] || $attrs[kebabCase(oldProp)];
-          if (isDef(oldProp) && !isDef(config[newProp])) {
-            if (type === Boolean && oldValue === '') {
-              oldValue = true;
-            }
-            config[newProp] = oldValue;
+      Object.keys(MigratingProps).forEach(oldProp => {
+        const { newProp, type } = MigratingProps[oldProp];
+        let oldValue = $attrs[oldProp] || $attrs[kebabCase(oldProp)];
+        if (isDef(oldProp) && !isDef(config[newProp])) {
+          if (type === Boolean && oldValue === '') {
+            oldValue = true;
           }
-        });
+          config[newProp] = oldValue;
+        }
+      });
 
       return config;
     },
@@ -290,9 +290,7 @@ export default {
         return false;
       }
 
-      return this.multiple
-        ? !!this.checkedNodes.filter(node => !node.isDisabled).length
-        : !!this.presentText;
+      return this.multiple ? !!this.checkedNodes.filter(node => !node.isDisabled).length : !!this.presentText;
     },
     panel() {
       return this.$refs.panel;
@@ -326,7 +324,7 @@ export default {
       }
     },
     options: {
-      handler: function() {
+      handler() {
         this.$nextTick(this.computePresentContent);
       },
       deep: true
@@ -546,12 +544,11 @@ export default {
         filterMethod = (node, keyword) => node.text.includes(keyword);
       }
 
-      const suggestions = this.panel.getFlattedNodes(this.leafOnly)
-        .filter(node => {
-          if (node.isDisabled) return false;
-          node.text = node.getText(this.showAllLevels, this.separator) || '';
-          return filterMethod(node, this.inputValue);
-        });
+      const suggestions = this.panel.getFlattedNodes(this.leafOnly).filter(node => {
+        if (node.isDisabled) return false;
+        node.text = node.getText(this.showAllLevels, this.separator) || '';
+        return filterMethod(node, this.inputValue);
+      });
 
       if (this.multiple) {
         this.presentTags.forEach(tag => {
@@ -628,7 +625,7 @@ export default {
       if (this.$isServer || !$el) return;
 
       const { suggestionPanel } = this.$refs;
-      const inputInner = $el.querySelector('.el-input__inner');
+      const inputInner = $el.querySelector('.t-input');
 
       if (!inputInner) return;
 
@@ -652,7 +649,7 @@ export default {
 
     /**
      * public methods
-    */
+     */
     getCheckedNodes(leafOnly) {
       return this.panel.getCheckedNodes(leafOnly);
     }

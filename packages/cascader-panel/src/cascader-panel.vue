@@ -1,16 +1,21 @@
 <template>
-  <div
+  <!-- <div
     :class="[
       'el-cascader-panel',
       border && 'is-bordered'
     ]"
-    @keydown="handleKeyDown">
-    <cascader-menu
-      ref="menu"
-      v-for="(menu, index) in menus"
-      :index="index"
-      :key="index"
-      :nodes="menu"></cascader-menu>
+    @keydown="handleKeyDown"> -->
+  <div :class="['t-popup__content', 't-cascader__dropdown']" @keydown="handleKeyDown">
+    <div class="t-cascader__panel t-cascader--normal">
+      <cascader-menu
+        ref="menu"
+        v-for="(menu, index) in menus"
+        :index="index"
+        :menu-length="menuLength"
+        :key="index"
+        :nodes="menu"
+      ></cascader-menu>
+    </div>
   </div>
 </template>
 
@@ -20,13 +25,7 @@ import Store from './store';
 import merge from 'element-ui/src/utils/merge';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-import {
-  noop,
-  coerceTruthyValueToArray,
-  isEqual,
-  isEmpty,
-  valueEquals
-} from 'element-ui/src/utils/util';
+import { noop, coerceTruthyValueToArray, isEqual, isEmpty, valueEquals } from 'element-ui/src/utils/util';
 
 const { keys: KeyCode } = AriaUtils;
 const DefaultProps = {
@@ -132,12 +131,15 @@ export default {
     },
     renderLabelFn() {
       return this.renderLabel || this.$scopedSlots.default;
+    },
+    menuLength() {
+      return this.menus.length;
     }
   },
 
   watch: {
     options: {
-      handler: function() {
+      handler() {
         this.initStore();
       },
       immediate: true,
@@ -224,9 +226,7 @@ export default {
     },
     calculateCheckedNodePaths() {
       const { checkedValue, multiple } = this;
-      const checkedValues = multiple
-        ? coerceTruthyValueToArray(checkedValue)
-        : [ checkedValue ];
+      const checkedValues = multiple ? coerceTruthyValueToArray(checkedValue) : [checkedValue];
       this.checkedNodePaths = checkedValues.map(v => {
         const checkedNode = this.getNodeByValue(v);
         return checkedNode ? checkedNode.pathNodes : [];
@@ -337,10 +337,9 @@ export default {
 
     /**
      * public methods
-    */
+     */
     calculateMultiCheckedValue() {
-      this.checkedValue = this.getCheckedNodes(this.leafOnly)
-        .map(node => node.getValueByOption());
+      this.checkedValue = this.getCheckedNodes(this.leafOnly).map(node => node.getValueByOption());
     },
     scrollIntoView() {
       if (this.$isServer) return;
@@ -350,8 +349,9 @@ export default {
         const menuElement = menu.$el;
         if (menuElement) {
           const container = menuElement.querySelector('.el-scrollbar__wrap');
-          const activeNode = menuElement.querySelector('.el-cascader-node.is-active') ||
-            menuElement.querySelector('.el-cascader-node.in-active-path');
+          const activeNode =
+            menuElement.querySelector('.t-cascader__item.t-is-selected') ||
+            menuElement.querySelector('.t-cascader__item.t-is-expanded');
           scrollIntoView(container, activeNode);
         }
       });
@@ -369,9 +369,7 @@ export default {
         const nodes = this.getFlattedNodes(leafOnly);
         return nodes.filter(node => node.checked);
       } else {
-        return this.isEmptyValue(checkedValue)
-          ? []
-          : [this.getNodeByValue(checkedValue)];
+        return this.isEmptyValue(checkedValue) ? [] : [this.getNodeByValue(checkedValue)];
       }
     },
     clearCheckedNodes() {
