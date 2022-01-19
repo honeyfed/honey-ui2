@@ -10,14 +10,18 @@ import MainHeader from './components/header';
 import SideNav from './components/side-nav';
 import FooterNav from './components/footer-nav';
 import title from './i18n/title';
-
 import 'packages/theme-chalk/src/index.scss';
-import 'packages/theme-chalk/src/tdesign/index.less'; // for t-design
 import './demo-styles/index.scss';
 import './assets/styles/common.css';
 import './assets/styles/fonts/style.css';
 import icon from './icon.json';
 import tdIcon from './icon_td.json';
+
+// for t-design
+if (process.env.NODE_ENV !== 'production') {
+  // import 'packages/theme-chalk/src/tdesign/index.less';
+  require('../packages/theme-chalk/src/tdesign/index.less');
+}
 
 Vue.use(Element);
 Vue.use(VueRouter);
