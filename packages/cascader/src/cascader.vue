@@ -15,7 +15,6 @@
   >
     <el-input
       ref="input"
-      class="t-input t-size-m"
       inner-class="t-cascader__content t-input__inner"
       v-model="multiple ? presentText : inputValue"
       :size="realSize"

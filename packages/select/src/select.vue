@@ -73,7 +73,7 @@
       />
     </div>
     <el-input
-      class="t-select__single"
+      class="t-select__single t-select__input"
       inner-class="t-input__inner"
       ref="reference"
       v-model="selectedLabel"
