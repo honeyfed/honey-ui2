@@ -26,7 +26,7 @@
         <slot name="prepend"></slot>
       </div>
       <!-- 前置内容 -->
-      <span class="t-input__prefix" :class="{ 't-input__prefix-icon': prefixIcon }" v-if="$slots.prefix || prefixIcon">
+      <span class="t-input__prefix" :class="{ 't-input__prefix-icon': true }" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
         <el-icon :tdName="prefixIcon" />
       </span>
@@ -52,7 +52,7 @@
       <!-- 后置内容 -->
       <span
         class="t-input__suffix"
-        :class="{ 't-input__suffix-icon': suffixIcon || showClear || showPwdVisible, 't-input__clear': showClear }"
+        :class="{ 't-input__suffix-icon': true, 't-input__clear': showClear }"
         v-if="getSuffixVisible()"
       >
         <!-- <span class="t-input__suffix-inner"> -->

@@ -22,7 +22,7 @@
             <span class="el-date-range-picker__editors-wrap">
               <span class="el-date-range-picker__time-picker-wrap">
                 <el-input
-                  size="small"
+                  size="s"
                   :disabled="rangeState.selecting"
                   ref="minInput"
                   :placeholder="t('el.datepicker.startDate')"
@@ -33,7 +33,7 @@
               </span>
               <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMinTimeClose">
                 <el-input
-                  size="small"
+                  size="s"
                   class="el-date-range-picker__editor"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.startTime')"
@@ -54,7 +54,7 @@
             <span class="el-date-range-picker__editors-wrap is-right">
               <span class="el-date-range-picker__time-picker-wrap">
                 <el-input
-                  size="small"
+                  size="s"
                   class="el-date-range-picker__editor"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.endDate')"
@@ -65,7 +65,7 @@
               </span>
               <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMaxTimeClose">
                 <el-input
-                  size="small"
+                  size="s"
                   class="el-date-range-picker__editor"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.endTime')"
@@ -168,7 +168,7 @@
       </div>
       <div class="el-picker-panel__footer" v-if="showTime">
         <el-button
-          size="mini"
+          size="medium"
           type="text"
           class="el-picker-panel__link-btn"
           @click="handleClear">
@@ -176,9 +176,10 @@
         </el-button>
         <el-button
           plain
-          size="mini"
+          size="medium"
           class="el-picker-panel__link-btn"
           :disabled="btnDisabled"
+          type="primary"
           @click="handleConfirm(false)">
           {{ t('el.datepicker.confirm') }}
         </el-button>

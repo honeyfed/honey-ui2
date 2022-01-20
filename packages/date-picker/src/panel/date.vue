@@ -23,7 +23,7 @@
               <el-input
                 :placeholder="t('el.datepicker.selectDate')"
                 :value="visibleDate"
-                size="small"
+                size="s"
                 @input="val => userInputDate = val"
                 @change="handleVisibleDateChange" />
             </span>
@@ -33,7 +33,7 @@
                 @focus="timePickerVisible = true"
                 :placeholder="t('el.datepicker.selectTime')"
                 :value="visibleTime"
-                size="small"
+                size="s"
                 @input="val => userInputTime = val"
                 @change="handleVisibleTimeChange" />
               <time-picker
@@ -123,7 +123,7 @@
         class="el-picker-panel__footer"
         v-show="footerVisible && currentView === 'date'">
         <el-button
-          size="mini"
+          size="medium"
           type="text"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
@@ -132,7 +132,8 @@
         </el-button>
         <el-button
           plain
-          size="mini"
+          size="medium"
+          type="primary"
           class="el-picker-panel__link-btn"
           @click="confirm">
           {{ t('el.datepicker.confirm') }}
