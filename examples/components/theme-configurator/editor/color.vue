@@ -29,7 +29,7 @@
   </section>
 </template>
 
-<style>
+<style scoped>
 input {
   cursor: pointer;
 }
