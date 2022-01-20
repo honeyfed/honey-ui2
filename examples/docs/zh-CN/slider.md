@@ -150,7 +150,7 @@
 :::demo 设置`vertical`可使 Slider 变成竖向模式，此时必须设置高度`height`属性
 ```html
 <template>
-  <div class="block">
+  <div class="block vertical">
     <el-slider
       v-model="value"
       vertical

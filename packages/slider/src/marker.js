@@ -10,7 +10,7 @@ export default {
     let label = typeof this.mark === 'string' ? this.mark : this.mark.label;
 
     return (
-      <div class="el-slider__marks-text" style={ this.mark.style || {} }>
+      <div class="t-slider__mark-text" style={ this.mark.style || {} }>
         { label }
       </div>
     );
