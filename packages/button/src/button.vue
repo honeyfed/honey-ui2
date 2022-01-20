@@ -20,7 +20,10 @@
     ]"
   >
     <i class="el-icon-loading t-loading" v-if="loading"></i>
-    <i :class="icon" v-if="icon && !loading"></i>
+    <template v-if="(tdIcon || icon) && !loading">
+      <el-icon v-if="tdIcon" :tdName="tdIcon" />
+      <i v-else :class="icon"></i>
+    </template>
     <span class="t-button_text" v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
@@ -50,6 +53,10 @@ export default {
     },
     size: String,
     icon: {
+      type: String,
+      default: ''
+    },
+    tdIcon: {
       type: String,
       default: ''
     },
