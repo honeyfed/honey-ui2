@@ -1,4 +1,4 @@
-@import "../common/var";
+@import '../common/var';
 
 @include b(month-table) {
   font-size: 12px;
@@ -78,5 +78,11 @@
     &.current:not(.disabled) .cell {
       color: $--datepicker-active-color;
     }
+  }
+}
+
+.t-date-picker--month {
+  .t-date-picker__cell-wrapper > span {
+    word-break: keep-all;
   }
 }

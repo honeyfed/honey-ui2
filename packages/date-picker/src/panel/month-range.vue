@@ -17,8 +17,30 @@
             @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
         </div>
         <div class="el-picker-panel__body">
-          <div class="el-picker-panel__content el-date-range-picker__content is-left">
-            <div class="el-date-range-picker__header">
+          <div class="el-picker-panel__content el-date-range-picker__content is-left t-date-picker__panel">
+
+            <div class="t-date-picker__header">
+              <span class="t-date-picker__header-title">
+                <span
+                  class="t-button t-size-s t-button--variant-text t-button--theme-default t-date-picker__header-btn"
+                >
+                  <span class="t-button__text">{{ leftLabel }}</span>
+                </span>
+              </span>
+              <span class="t-date-picker__header-controller">
+                <el-button type="text" class="t-date-picker__header-controller__btn" @click="leftPrevYear">
+                  <el-icon tdName="chevron-left" />
+                </el-button>
+                <el-button
+                  type="text"
+                  class="t-date-picker__header-controller__btn"
+                  @click="leftNextYear"
+                  :disabled="!enableYearArrow"
+                >
+                  <el-icon tdName="chevron-right" />
+                </el-button>
+              </span>
+            <!-- <div class="el-date-range-picker__header">
               <button
                 type="button"
                 @click="leftPrevYear"
@@ -30,7 +52,7 @@
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
                 class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-              <div>{{ leftLabel }}</div>
+              <div>{{ leftLabel }}</div> -->
             </div>
             <month-table
               selection-mode="range"
@@ -44,8 +66,29 @@
               @pick="handleRangePick">
             </month-table>
           </div>
-          <div class="el-picker-panel__content el-date-range-picker__content is-right">
-            <div class="el-date-range-picker__header">
+          <div class="el-picker-panel__content el-date-range-picker__content is-right t-date-picker__panel">
+            <div class="t-date-picker__header">
+              <span class="t-date-picker__header-title">
+                <span
+                  class="t-button t-size-s t-button--variant-text t-button--theme-default t-date-picker__header-btn"
+                >
+                  <span class="t-button__text">{{ rightLabel }}</span>
+                </span>
+              </span>
+              <span class="t-date-picker__header-controller">
+                <el-button
+                  type="text"
+                  class="t-date-picker__header-controller__btn"
+                  @click="rightPrevYear"
+                  :disabled="!enableYearArrow"
+                >
+                  <el-icon tdName="chevron-left" />
+                </el-button>
+                <el-button type="text" class="t-date-picker__header-controller__btn" @click="rightNextYear">
+                  <el-icon tdName="chevron-right" />
+                </el-button>
+              </span>
+            <!-- <div class="el-date-range-picker__header">
               <button
                 type="button"
                 v-if="unlinkPanels"
@@ -57,7 +100,7 @@
                 type="button"
                 @click="rightNextYear"
                 class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-              <div>{{ rightLabel }}</div>
+              <div>{{ rightLabel }}</div> -->
             </div>
             <month-table
               selection-mode="range"

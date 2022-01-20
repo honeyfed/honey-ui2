@@ -68,6 +68,10 @@
     @include when(right) {
       text-align: right;
     }
+
+    .t-popup{
+      position: absolute;
+    }
   }
 
   @include e(time-header) {
