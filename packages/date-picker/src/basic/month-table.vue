@@ -28,7 +28,7 @@ const clearDate = date => {
   return new Date(date.getFullYear(), date.getMonth());
 };
 
-const getMonthTimestamp = function (time) {
+const getMonthTimestamp = time => {
   if (typeof time === 'number' || typeof time === 'string') {
     return clearDate(new Date(time)).getTime();
   } else if (time instanceof Date) {
