@@ -9,26 +9,6 @@
       { 't-is-controls-right': controlsAtRight }
     ]"
   >
-    <!-- <span
-      class="el-input-number__decrease"
-      role="button"
-      v-if="controls"
-      v-repeat-click="decrease"
-      :class="{ 'is-disabled': minDisabled }"
-      @keydown.enter="decrease"
-    >
-      <i :class="`el-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
-    </span>
-    <span
-      class="el-input-number__increase"
-      role="button"
-      v-if="controls"
-      v-repeat-click="increase"
-      :class="{ 'is-disabled': maxDisabled }"
-      @keydown.enter="increase"
-    >
-      <i :class="`el-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
-    </span> -->
     <el-button
       v-if="controls"
       class="t-input-number__decrease t-button--shape-square"
@@ -36,7 +16,7 @@
       variant="outline"
       @keydown.enter="decrease"
       :tdIcon="controlsAtRight ? 'chevron-down' : 'remove'"
-      :disabled="inputNumberDisabled"
+      :disabled="minDisabled"
     />
     <el-input
       ref="input"
@@ -63,7 +43,7 @@
       variant="outline"
       :tdIcon="controlsAtRight ? 'chevron-up' : 'add'"
       @keydown.enter="increase"
-      :disabled="inputNumberDisabled"
+      :disabled="maxDisabled"
     />
   </div>
 </template>
