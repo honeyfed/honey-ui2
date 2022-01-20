@@ -103,12 +103,12 @@ export default {
   属性方式：
   <el-input
     placeholder="请选择日期"
-    suffix-icon="el-icon-date"
+    suffix-icon="time"
     v-model="input1">
   </el-input>
   <el-input
     placeholder="请输入内容"
-    prefix-icon="el-icon-search"
+    prefix-icon="lock-on"
     v-model="input2">
   </el-input>
 </div>
@@ -254,24 +254,19 @@ export default {
 ```html
 <div class="demo-input-size">
   <el-input
-    placeholder="请输入内容"
-    suffix-icon="el-icon-date"
-    v-model="input1">
-  </el-input>
-  <el-input
-    size="medium"
+    size="s"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
     v-model="input2">
   </el-input>
   <el-input
-    size="small"
+    size="m"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
     v-model="input3">
   </el-input>
   <el-input
-    size="mini"
+    size="l"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
     v-model="input4">
