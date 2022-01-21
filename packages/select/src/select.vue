@@ -3,7 +3,7 @@
     ref="wrapper"
     class="el-select t-select"
     :class="[
-      't-size' + (selectSize || 'm'),
+      't-size-' + (selectSize || 'm'),
       {
         't-is-disabled': selectDisabled,
         't-has-prefix': prefix,

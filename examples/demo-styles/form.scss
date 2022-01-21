@@ -1,4 +1,8 @@
 .demo-form {
+  form {
+    max-width: 640px;
+  }
+
   .el-select .el-input {
     width: 380px;
   }
@@ -18,7 +22,7 @@
 
     &:after,
     &:before {
-      content: " ";
+      content: ' ';
       display: table;
     }
     &:after {

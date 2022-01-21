@@ -204,11 +204,12 @@ export default {
       return this.elForm ? this.elForm.statusIcon : false;
     },
     validateIcon() {
-      return {
-        validating: 'el-icon-loading',
-        success: 'el-icon-circle-check',
-        error: 'el-icon-circle-close'
-      }[this.validateState];
+      return null;
+      // return {
+      //   validating: 'el-icon-loading',
+      //   success: 'el-icon-circle-check',
+      //   error: 'el-icon-circle-close'
+      // }[this.validateState];
     },
     textareaStyle() {
       return merge({}, this.textareaCalcStyle, { resize: this.resize });
