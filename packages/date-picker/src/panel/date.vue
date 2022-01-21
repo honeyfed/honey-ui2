@@ -120,7 +120,7 @@
                 type="text"
                 class="t-date-picker__header-controller__btn"
                 @click="prevYear"
-                v-show="currentView !== 'date'"
+                v-if="currentView !== 'date'"
               >
                 <el-icon tdName="chevron-left" />
               </el-button>
@@ -128,7 +128,7 @@
                 type="text"
                 class="t-date-picker__header-controller__btn"
                 @click="prevMonth"
-                v-show="currentView === 'date'"
+                v-if="currentView === 'date'"
               >
                 <el-icon tdName="chevron-left" />
               </el-button>
@@ -143,7 +143,7 @@
                 type="text"
                 class="t-date-picker__header-controller__btn"
                 @click="nextMonth"
-                v-show="currentView === 'date'"
+                v-if="currentView === 'date'"
               >
                 <el-icon tdName="chevron-right" />
               </el-button>
@@ -151,7 +151,7 @@
                 type="text"
                 class="t-date-picker__header-controller__btn"
                 @click="nextYear"
-                v-show="currentView !== 'date'"
+                v-if="currentView !== 'date'"
               >
                 <el-icon tdName="chevron-right" />
               </el-button>
