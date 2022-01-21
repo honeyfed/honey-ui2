@@ -21,14 +21,13 @@
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
-          type="info"
           @close="deleteTag($event, selected[0])"
           disable-transitions
         >
-          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
+          <span>{{ selected[0].currentLabel }}</span>
         </el-tag>
-        <el-tag v-if="selected.length > 1" :closable="false" :size="collapseTagSize" type="info" disable-transitions>
-          <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
+        <el-tag v-if="selected.length > 1" :closable="false" :size="collapseTagSize" disable-transitions>
+          <span>+ {{ selected.length - 1 }}</span>
         </el-tag>
       </span>
       <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
@@ -38,11 +37,10 @@
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="item.hitState"
-          type="info"
           @close="deleteTag($event, item)"
           disable-transitions
         >
-          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
+          <span>{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
 
@@ -128,11 +126,11 @@
           <el-option :value="query" created v-if="showNewOption"> </el-option>
           <slot></slot>
           <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0))">
-          <slot name="empty" v-if="$slots.empty"></slot>
-          <p class="t-select__empty t-size-m" v-else>
-            {{ emptyText }}
-          </p>
-        </template>
+            <slot name="empty" v-if="$slots.empty"></slot>
+            <p class="t-select__empty t-size-m" v-else>
+              {{ emptyText }}
+            </p>
+          </template>
         </el-scrollbar>
       </el-select-menu>
     </transition>
@@ -657,10 +655,16 @@ export default {
         const tags = this.$refs.tags;
         const tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
         const sizeInMap = this.initialInputHeight || 40;
-        input.style.height =
+        const calcHeight =
           this.selected.length === 0
             ? sizeInMap + 'px'
             : Math.max(tags ? tagsHeight + (tagsHeight > sizeInMap ? 6 : 0) : 0, sizeInMap) + 'px';
+        input.style.height = calcHeight;
+        // for td
+        const wrapper = this.$refs.reference.$el;
+        if (wrapper) {
+          wrapper.style.height = calcHeight;
+        }
         if (this.visible && this.emptyText !== false) {
           this.broadcast('ElSelectDropdown', 'updatePopper');
         }

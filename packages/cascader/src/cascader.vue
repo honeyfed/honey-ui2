@@ -45,7 +45,6 @@
       <el-tag
         v-for="tag in presentTags"
         :key="tag.key"
-        type="info"
         :size="tagSize"
         :hit="tag.hitState"
         :closable="tag.closable"

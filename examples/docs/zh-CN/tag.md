@@ -9,7 +9,7 @@
 ```html
 <el-tag>标签一</el-tag>
 <el-tag type="success">标签二</el-tag>
-<el-tag type="info">标签三</el-tag>
+<el-tag type="primary">标签三</el-tag>
 <el-tag type="warning">标签四</el-tag>
 <el-tag type="danger">标签五</el-tag>
 ```
@@ -35,7 +35,7 @@
         tags: [
           { name: '标签一', type: '' },
           { name: '标签二', type: 'success' },
-          { name: '标签三', type: 'info' },
+          { name: '标签三', type: 'primary' },
           { name: '标签四', type: 'warning' },
           { name: '标签五', type: 'danger' }
         ]
@@ -165,6 +165,16 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
     {{ item.label }}
   </el-tag>
 </div>
+<div class="tag-group">
+  <span class="tag-group__title">Light</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="light">
+    {{ item.label }}
+  </el-tag>
+</div>
 
 <script>
   export default {
@@ -173,7 +183,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
         items: [
           { type: '', label: '标签一' },
           { type: 'success', label: '标签二' },
-          { type: 'info', label: '标签三' },
+          { type: 'primary', label: '标签三' },
           { type: 'danger', label: '标签四' },
           { type: 'warning', label: '标签五' }
         ]
@@ -187,7 +197,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 类型 | string | success/info/warning/danger | — |
+| type | 类型 | string | success/primary/warning/danger | — |
 | closable | 是否可关闭 | boolean | — | false |
 | disable-transitions | 是否禁用渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
