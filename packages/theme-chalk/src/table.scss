@@ -567,10 +567,21 @@
 
 .t-table {
   overflow: hidden;
+  .el-table__expand-icon {
+    display: inline-block;
+    margin-right: 6px;
+  }
+  .t-table__expand-box {
+    transition: all 0.2s ease 0s;
+  }
 }
 
 .t-table__header--fixed .el-table__body-wrapper {
   width: auto !important;
+}
+
+.t-table__header--fixed .t-table__header {
+  z-index: 0 !important;
 }
 
 .t-table__body::scrollbar {
@@ -586,4 +597,9 @@
 .t-table__body::-webkit-scrollbar-thumb {
   background: var(--td-scrollbar-color);
   border-radius: 11px;
+}
+
+.el-table-filter__checkbox-group .t-checkbox {
+  display: flex;
+  margin-bottom: 6px;
 }
