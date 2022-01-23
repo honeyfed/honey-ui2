@@ -1,7 +1,7 @@
 <template>
   <div
     ref="wrapper"
-    class="el-select t-select"
+    class="el-select t-select t-select__wrap"
     :class="[
       't-size-' + (selectSize || 'm'),
       {

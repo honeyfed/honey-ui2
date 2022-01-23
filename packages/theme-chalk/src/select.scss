@@ -18,7 +18,7 @@
 
   .t-input__inner {
     cursor: pointer;
-    padding-right: 35px;
+    width: 100%;
   }
 
   @include e(input) {
@@ -165,6 +165,23 @@
         transform: translate(0, 0.5px);
       }
     }
+  }
+}
+
+.t-select {
+  .t-select__input {
+    height: 30px;
+  }
+  .el-select__tags {
+    .t-tag {
+      max-width: 100%;
+    }
+  }
+  .t-input__inner {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal;
   }
 }
 

@@ -43,7 +43,7 @@ export default {
     ];
     const tagEl = (
       <span class={classes} style={{ backgroundColor: this.color }} on-click={this.handleClick}>
-        {this.$slots.default}
+        <span class="t-tag--text">{this.$slots.default}</span>
         {this.closable && <el-icon tdName="close" class="t-tag__icon-close" on-click={this.handleClose} />}
       </span>
     );
