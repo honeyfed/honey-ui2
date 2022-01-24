@@ -1,5 +1,5 @@
 <template>
-  <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
+  <div class="t-breadcrumb" aria-label="Breadcrumb" role="navigation">
     <slot></slot>
   </div>
 </template>
@@ -10,7 +10,7 @@
     props: {
       separator: {
         type: String,
-        default: '/'
+        default: ''
       },
       separatorClass: {
         type: String,
@@ -25,7 +25,7 @@
     },
 
     mounted() {
-      const items = this.$el.querySelectorAll('.el-breadcrumb__item');
+      const items = this.$el.querySelectorAll('.t-breadcrumb__item');
       if (items.length) {
         items[items.length - 1].setAttribute('aria-current', 'page');
       }
