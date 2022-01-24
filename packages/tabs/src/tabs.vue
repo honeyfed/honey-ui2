@@ -149,23 +149,23 @@
         ref: 'nav'
       };
       const header = (
-        <div class={['el-tabs__header', `is-${tabPosition}`]}>
+        <div class={['t-tabs__header', `t-is-${tabPosition}`]}>
           {newButton}
           <tab-nav { ...navData }></tab-nav>
         </div>
       );
       const panels = (
-        <div class="el-tabs__content">
+        <div class="t-tabs__content">
           {this.$slots.default}
         </div>
       );
 
       return (
         <div class={{
-          'el-tabs': true,
+          't-tabs': true,
           'el-tabs--card': type === 'card',
-          [`el-tabs--${tabPosition}`]: true,
-          'el-tabs--border-card': type === 'border-card'
+          'el-tabs--border-card': type === 'border-card',
+          [`t-is-${tabPosition}`]: true
         }}>
           { tabPosition !== 'bottom' ? [header, panels] : [panels, header] }
         </div>
