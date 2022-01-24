@@ -69,9 +69,9 @@
 ```html
 <template>
   <el-table
-    v-loading="loading"
+    v-loading="isLoading"
     element-loading-text="拼命加载中"
-    element-loading-spinner="el-icon-loading"
+    element-loading-spinner="loading"
     element-loading-background="rgba(0, 0, 0, 0.8)"
     :data="tableData"
     style="width: 100%">
@@ -109,7 +109,7 @@
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
         }],
-        loading: true
+        isLoading: true
       };
     }
   };
@@ -155,8 +155,8 @@
       openFullScreen2() {
         const loading = this.$loading({
           lock: true,
-          text: 'Loading',
-          spinner: 'el-icon-loading',
+          text: 'Custom Loading Text',
+          spinner: 'loading',
           background: 'rgba(0, 0, 0, 0.7)'
         });
         setTimeout(() => {
