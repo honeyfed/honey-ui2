@@ -47,6 +47,7 @@
   <el-button :plain="true" @click="open3">警告</el-button>
   <el-button :plain="true" @click="open1">消息</el-button>
   <el-button :plain="true" @click="open4">错误</el-button>
+  <el-button :plain="true" @click="open5">帮助/疑问</el-button>
 </template>
 
 <script>
@@ -71,6 +72,10 @@
 
       open4() {
         this.$message.error('错了哦，这是一条错误消息');
+      },
+
+      open5() {
+        this.$message.question('用于帮助用户操作的信息提示');
       }
     }
   }
@@ -89,6 +94,7 @@
   <el-button :plain="true" @click="open2">成功</el-button>
   <el-button :plain="true" @click="open3">警告</el-button>
   <el-button :plain="true" @click="open4">错误</el-button>
+  <el-button :plain="true" @click="open5">疑问</el-button>
 </template>
 
 <script>
@@ -105,7 +111,7 @@
         this.$message({
           showClose: true,
           message: '恭喜你，这是一条成功消息',
-          type: 'success'
+          type: 'success',
         });
       },
 
@@ -122,6 +128,14 @@
           showClose: true,
           message: '错了哦，这是一条错误消息',
           type: 'error'
+        });
+      },
+
+      open5() {
+        this.$message({
+          showClose: true,
+          message: '用于帮助用户操作的信息提示',
+          type: 'question'
         });
       }
     }
@@ -202,7 +216,7 @@ import { Message } from 'element-ui';
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | message | 消息文字 | string / VNode | — | — |
-| type | 主题 | string | success/warning/info/error | info |
+| type | 主题 | string | success/warning/info/error/question | info |
 | iconClass | 自定义图标的类名，会覆盖 `type` | string | — | — |
 | dangerouslyUseHTMLString | 是否将 message 属性作为 HTML 片段处理 | boolean | — | false |
 | customClass | 自定义类名 | string | — | — |
