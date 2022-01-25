@@ -46,7 +46,7 @@
         default: 'bottom-end'
       },
       visibleArrow: {
-        default: true
+        default: false
       },
       showTimeout: {
         type: Number,
@@ -283,7 +283,7 @@
       const menuElm = disabled ? null : this.$slots.dropdown;
 
       return (
-        <div class="el-dropdown" v-clickoutside={hide} aria-disabled={disabled}>
+        <div class="el-dropdown t-popup__reference" v-clickoutside={hide} aria-disabled={disabled}>
           {triggerElm}
           {menuElm}
         </div>
