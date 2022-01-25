@@ -1,11 +1,13 @@
 <template>
   <div
-    class="el-steps"
+    class="t-steps"
     :class="[
-       !simple && 'el-steps--' + direction,
-       simple && 'el-steps--simple'
-     ]">
-      <slot></slot>
+      't-steps--' + direction,
+      simple ? 't-steps--dot-anchor' : 't-steps--default-anchor',
+      direction === 'vertical' && `t-steps--${sequence}`
+    ]"
+  >
+    <slot></slot>
   </div>
 </template>
 
@@ -33,6 +35,10 @@ export default {
     processStatus: {
       type: String,
       default: 'process'
+    },
+    sequence: {
+      type: String,
+      default: 'positive'
     }
   },
 
@@ -47,7 +53,7 @@ export default {
     getMigratingConfig() {
       return {
         props: {
-          'center': 'center is removed.'
+          center: 'center is removed.'
         }
       };
     }
