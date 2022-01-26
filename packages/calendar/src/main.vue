@@ -1,5 +1,5 @@
 <template>
-  <div class="el-calendar">
+  <div class="el-calendar t-calendar t-calendar--full">
     <div class="el-calendar__header">
       <div class="el-calendar__title">
         {{ i18nDate }}
