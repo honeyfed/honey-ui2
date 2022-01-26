@@ -7,23 +7,27 @@
 对不同章节的文本段落进行分割。
 
 :::demo
+
 ```html
 <template>
   <div>
     <span>青春是一个短暂的美梦, 当你醒来时, 它早已消失无踪</span>
     <el-divider></el-divider>
     <span>少量的邪恶足以抵消全部高贵的品质, 害得人声名狼藉</span>
+    <el-divider dashed></el-divider>
+    <span>少量的邪恶足以抵消全部高贵的品质, 害得人声名狼藉</span>
   </div>
 </template>
 ```
+
 :::
 
 ### 设置文案
 
 可以在分割线上自定义文案内容。
 
-
 :::demo
+
 ```html
 <template>
   <div>
@@ -36,11 +40,13 @@
   </div>
 </template>
 ```
+
 :::
 
 ### 垂直分割
 
 :::demo
+
 ```html
 <template>
   <div>
@@ -52,10 +58,13 @@
   </div>
 </template>
 ```
+
 :::
 
 ### Divider Attributes
-| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
-|-------------  |---------------- |---------------- |---------------------- |-------- |
-| direction      | 设置分割线方向  | string  |            horizontal / vertical          |    horizontal     |
-| content-position      | 设置分割线文案的位置 | string  |  left / right / center  |  center |
+
+| 参数             | 说明                 | 类型    | 可选值                | 默认值     |
+| ---------------- | -------------------- | ------- | --------------------- | ---------- |
+| direction        | 设置分割线方向       | string  | horizontal / vertical | horizontal |
+| content-position | 设置分割线文案的位置 | string  | left / right / center | center     |
+| dashed           | 是否为虚线           | boolean | -                     | false      |

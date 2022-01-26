@@ -2,12 +2,17 @@
   <div
     v-bind="data.attrs"
     v-on="listeners"
-    :class="[data.staticClass, 'el-divider', `el-divider--${props.direction}`]"
+    :class="[
+      data.staticClass,
+      't-divider',
+      `t-divider--${props.direction}`,
+      props.dashed ? 't-divider--dashed' : '',
+      slots().default && props.direction !== 'vertical'
+        ? `t-divider--with-text t-divider--with-text-${props.contentPosition}`
+        : ''
+    ]"
   >
-    <div
-      v-if="slots().default && props.direction !== 'vertical'"
-      :class="['el-divider__text', `is-${props.contentPosition}`]"
-     >
+    <div v-if="slots().default && props.direction !== 'vertical'" :class="['t-divider__inner-text']">
       <slot />
     </div>
   </div>
@@ -30,8 +35,16 @@ export default {
       validator(val) {
         return ['left', 'center', 'right'].indexOf(val) !== -1;
       }
+    },
+    dashed: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    showInnerText() {
+      return this.$slots.default && this.props.direction !== 'vertical';
     }
   }
 };
-
 </script>
