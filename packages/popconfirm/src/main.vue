@@ -1,44 +1,28 @@
 <template>
-  <el-popover
-    v-bind="$attrs"
-    v-model="visible"
-    trigger="click"
-  >
-  <div class="el-popconfirm">
-    <p class="el-popconfirm__main">
-    <i
-      v-if="!hideIcon"
-      :class="icon"
-      class="el-popconfirm__icon"
-      :style="{color: iconColor}"
-    ></i>
-      {{title}}
-    </p>
-    <div class="el-popconfirm__action">
-      <el-button 
-        size="mini" 
-        :type="cancelButtonType" 
-        @click="cancel"
-      >
-        {{ displayCancelButtonText }}
-      </el-button>
-      <el-button 
-        size="mini" 
-        :type="confirmButtonType" 
-        @click="confirm"
-      >
-        {{ displayConfirmButtonText }}
-      </el-button>
+  <el-popover v-bind="$attrs" v-model="visible" trigger="click">
+    <div class="t-popconfirm__content">
+      <div class="t-popconfirm__body">
+        <!-- <i v-if="!hideIcon" :class="icon" class="el-popconfirm__icon" :style="{ color: iconColor }"></i> -->
+        <el-icon v-if="!hideIcon" :tdName="icon" class="t-popconfirm__icon--default" :style="{ color: iconColor }" />
+        <div class="t-popconfirm__inner">{{ title }}</div>
+      </div>
+      <div class="t-popconfirm__buttons">
+        <el-button size="medium" class="t-popconfirm__cancel" :type="cancelButtonType" @click="cancel">
+          {{ displayCancelButtonText }}
+        </el-button>
+        <el-button size="medium" class="t-popconfirm__confirm" :type="confirmButtonType" @click="confirm">
+          {{ displayConfirmButtonText }}
+        </el-button>
+      </div>
     </div>
-  </div>
-  <slot name="reference" slot="reference"></slot>
-</el-popover>
+    <slot name="reference" slot="reference"></slot>
+  </el-popover>
 </template>
 
 <script>
 import ElPopover from 'element-ui/packages/popover';
 import ElButton from 'element-ui/packages/button';
-import {t} from 'element-ui/src/locale';
+import { t } from 'element-ui/src/locale';
 
 export default {
   name: 'ElPopconfirm',
@@ -62,7 +46,7 @@ export default {
     },
     icon: {
       type: String,
-      default: 'el-icon-question'
+      default: 'error-circle'
     },
     iconColor: {
       type: String,
